@@ -18,13 +18,14 @@ knitr::opts_chunk$set(echo = F, warning = F,include=T, message=F, results="marku
 
 ```{r libraries}
 # source("R/functions.R") # call functions
+
 library(tidyverse)
 library(lubridate)
-
 ```
 
 # Define parameters to use for analysis
 ## Diabetes manegement parameters
+
 ```{r}
 #Set low and high threesholds:
 low <- 70
@@ -52,6 +53,7 @@ quan95 = function(x) {
 ```
 ## Insuline model parameters
 ### old
+
 ```{r IoB function, eval=F}
 insulin_duration <- 6*60 # 5 hours of duration
 delay <- 7.6 # delay in first compartment, t
