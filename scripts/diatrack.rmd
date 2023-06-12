@@ -200,7 +200,7 @@ to <- "2023-01-29"
 
 ## Load CGM data
 ```{r load data}
-glu_path <- "data/export20230126-165100.csv"
+glu_path <- "data/CGM_xDrip_export_20230126-165100.csv"
 
 if (source == "freestyle"){
 #Import freestyle
@@ -254,7 +254,7 @@ while(i <= nrow(glucose)){
 ## Load Insulin pump data
 all insulin
 ```{r}
-ins_path <- "data/Josep Garnica Caparrós 8-3-2023.csv"
+ins_path <- "data/Insulin_pump_MiniMed_8-3-2023.csv"
 ins <- read.csv2(ins_path, skip = 6, header = T) %>% 
   replace(.=="",NA) %>% 
   mutate(Index = as.numeric(Index),
