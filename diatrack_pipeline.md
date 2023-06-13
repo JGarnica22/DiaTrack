@@ -25,7 +25,7 @@ library(renv)
 options(renv.verbose = F)
 
 # Load the same packages versions using renv package
-restore()
+restore() 
 
 # Load utilities
 source("scripts/Utils.R")
@@ -75,32 +75,75 @@ glu_path <- "data/CGM_xDrip_export_20230126-165100.csv"
 
 # Process glucose data
 glucose <- CGM_process(glupath)
-
-show_data(glucose[100:106,])
 ```
 
-\begin{table}
-\centering\begingroup\fontsize{10}{12}\selectfont
 
-\begin{tabular}{r|r|r|r|r|r}
-\hline
-Ozone & Solar.R & Wind & Temp & Month & Day\\
-\hline
-41 & 190 & 7.4 & 67 & 5 & 1\\
-\hline
-36 & 118 & 8.0 & 72 & 5 & 2\\
-\hline
-12 & 149 & 12.6 & 74 & 5 & 3\\
-\hline
-18 & 313 & 11.5 & 62 & 5 & 4\\
-\hline
-NA & NA & 14.3 & 56 & 5 & 5\\
-\hline
-28 & NA & 14.9 & 66 & 5 & 6\\
-\hline
-\end{tabular}
-\endgroup{}
-\end{table}
+```r
+kable(glucose[100:106,])
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:left;"> time </th>
+   <th style="text-align:right;"> glucose </th>
+   <th style="text-align:right;"> slope </th>
+   <th style="text-align:right;"> slope15 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 100 </td>
+   <td style="text-align:left;"> 2021-12-29 08:22:00 </td>
+   <td style="text-align:right;"> 128 </td>
+   <td style="text-align:right;"> -1.0000000 </td>
+   <td style="text-align:right;"> -0.4666667 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 101 </td>
+   <td style="text-align:left;"> 2021-12-29 08:27:00 </td>
+   <td style="text-align:right;"> 132 </td>
+   <td style="text-align:right;"> 0.8000000 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 102 </td>
+   <td style="text-align:left;"> 2021-12-29 08:32:00 </td>
+   <td style="text-align:right;"> 139 </td>
+   <td style="text-align:right;"> 1.4000000 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 103 </td>
+   <td style="text-align:left;"> 2021-12-29 08:37:00 </td>
+   <td style="text-align:right;"> 143 </td>
+   <td style="text-align:right;"> 0.8000000 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 104 </td>
+   <td style="text-align:left;"> 2021-12-29 08:42:00 </td>
+   <td style="text-align:right;"> 144 </td>
+   <td style="text-align:right;"> 0.2000000 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 105 </td>
+   <td style="text-align:left;"> 2021-12-29 08:49:00 </td>
+   <td style="text-align:right;"> 139 </td>
+   <td style="text-align:right;"> -0.7142857 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 106 </td>
+   <td style="text-align:left;"> 2021-12-29 08:54:00 </td>
+   <td style="text-align:right;"> 142 </td>
+   <td style="text-align:right;"> 0.6000000 </td>
+   <td style="text-align:right;"> -0.0588235 </td>
+  </tr>
+</tbody>
+</table>
 
 # Load and process Insulin pump data
 
@@ -125,32 +168,113 @@ tins <- Insulin_process(ins_path)
 ## [1] "Starting insulin in plasma estimation"
 ```
 
+
 ```r
-show_data(tins[206145:206151,])
+kable(tins[206145:206151,])
 ```
 
-\begin{table}
-\centering\begingroup\fontsize{10}{12}\selectfont
-
-\begin{tabular}{r|r|r|r|r|r}
-\hline
-Ozone & Solar.R & Wind & Temp & Month & Day\\
-\hline
-41 & 190 & 7.4 & 67 & 5 & 1\\
-\hline
-36 & 118 & 8.0 & 72 & 5 & 2\\
-\hline
-12 & 149 & 12.6 & 74 & 5 & 3\\
-\hline
-18 & 313 & 11.5 & 62 & 5 & 4\\
-\hline
-NA & NA & 14.3 & 56 & 5 & 5\\
-\hline
-28 & NA & 14.9 & 66 & 5 & 6\\
-\hline
-\end{tabular}
-\endgroup{}
-\end{table}
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:left;"> time </th>
+   <th style="text-align:left;"> Bolus_type </th>
+   <th style="text-align:right;"> Injec_bolus </th>
+   <th style="text-align:left;"> Action </th>
+   <th style="text-align:right;"> Basal_rate </th>
+   <th style="text-align:right;"> Injec_basal </th>
+   <th style="text-align:right;"> Bolus_ActI </th>
+   <th style="text-align:right;"> Basal_ActI </th>
+   <th style="text-align:right;"> Total_ActI </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 206145 </td>
+   <td style="text-align:left;"> 2022-12-05 14:09:00 </td>
+   <td style="text-align:left;"> Normal </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9647131 </td>
+   <td style="text-align:right;"> 0.8625263 </td>
+   <td style="text-align:right;"> 1.827239 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 206146 </td>
+   <td style="text-align:left;"> 2022-12-05 14:10:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9570441 </td>
+   <td style="text-align:right;"> 0.8627366 </td>
+   <td style="text-align:right;"> 1.819781 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 206147 </td>
+   <td style="text-align:left;"> 2022-12-05 14:11:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9492993 </td>
+   <td style="text-align:right;"> 0.8629512 </td>
+   <td style="text-align:right;"> 1.812250 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 206148 </td>
+   <td style="text-align:left;"> 2022-12-05 14:12:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9414855 </td>
+   <td style="text-align:right;"> 0.8631698 </td>
+   <td style="text-align:right;"> 1.804655 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 206149 </td>
+   <td style="text-align:left;"> 2022-12-05 14:13:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9336091 </td>
+   <td style="text-align:right;"> 0.8633922 </td>
+   <td style="text-align:right;"> 1.797001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 206150 </td>
+   <td style="text-align:left;"> 2022-12-05 14:14:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9256765 </td>
+   <td style="text-align:right;"> 0.8636180 </td>
+   <td style="text-align:right;"> 1.789295 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 206151 </td>
+   <td style="text-align:left;"> 2022-12-05 14:15:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.85 </td>
+   <td style="text-align:right;"> 0.0141667 </td>
+   <td style="text-align:right;"> 0.9176936 </td>
+   <td style="text-align:right;"> 0.8638471 </td>
+   <td style="text-align:right;"> 1.781541 </td>
+  </tr>
+</tbody>
+</table>
 
 
 # Merge glucose and insulin datasets
@@ -191,32 +315,145 @@ At the same time we categorize datetime in weekdays, hours, and timeday for the 
 source("scripts/Event_classification.R")
 # Classifiy events, compute associated variables and categorize datetime
 events <- Event_classification(fi)
-
-show_data(head(events))
 ```
 
-\begin{table}
-\centering\begingroup\fontsize{10}{12}\selectfont
 
-\begin{tabular}{r|r|r|r|r|r}
-\hline
-Ozone & Solar.R & Wind & Temp & Month & Day\\
-\hline
-41 & 190 & 7.4 & 67 & 5 & 1\\
-\hline
-36 & 118 & 8.0 & 72 & 5 & 2\\
-\hline
-12 & 149 & 12.6 & 74 & 5 & 3\\
-\hline
-18 & 313 & 11.5 & 62 & 5 & 4\\
-\hline
-NA & NA & 14.3 & 56 & 5 & 5\\
-\hline
-28 & NA & 14.9 & 66 & 5 & 6\\
-\hline
-\end{tabular}
-\endgroup{}
-\end{table}
+```r
+kable(head(events))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Event_type </th>
+   <th style="text-align:left;"> start </th>
+   <th style="text-align:left;"> end </th>
+   <th style="text-align:left;"> Event_subtype </th>
+   <th style="text-align:right;"> extreme.value </th>
+   <th style="text-align:right;"> AUC_out_range </th>
+   <th style="text-align:right;"> Total_slope </th>
+   <th style="text-align:right;"> Diff_bolus </th>
+   <th style="text-align:right;"> Bolus_ActI </th>
+   <th style="text-align:right;"> Basal_ActI </th>
+   <th style="text-align:right;"> Total_ActI </th>
+   <th style="text-align:right;"> N_bolus </th>
+   <th style="text-align:left;"> Overcorrection </th>
+   <th style="text-align:left;"> weekday </th>
+   <th style="text-align:right;"> timehour </th>
+   <th style="text-align:left;"> timeday </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Meal </td>
+   <td style="text-align:left;"> 2022-07-16 03:05:00 </td>
+   <td style="text-align:left;"> 2022-07-16 07:35:00 </td>
+   <td style="text-align:left;"> Hyperglycemia </td>
+   <td style="text-align:right;"> 188 </td>
+   <td style="text-align:right;"> 185.4522 </td>
+   <td style="text-align:right;"> 2.000000 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.3495308 </td>
+   <td style="text-align:right;"> 0.3915664 </td>
+   <td style="text-align:right;"> 0.7410972 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> night </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Meal </td>
+   <td style="text-align:left;"> 2022-07-16 12:44:00 </td>
+   <td style="text-align:left;"> 2022-07-16 17:14:00 </td>
+   <td style="text-align:left;"> Normoglycemia </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> morning </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Meal </td>
+   <td style="text-align:left;"> 2022-07-16 16:53:00 </td>
+   <td style="text-align:left;"> 2022-07-16 21:23:00 </td>
+   <td style="text-align:left;"> Hyperglycemia </td>
+   <td style="text-align:right;"> 215 </td>
+   <td style="text-align:right;"> 1027.0810 </td>
+   <td style="text-align:right;"> 2.750000 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 2.0966934 </td>
+   <td style="text-align:right;"> 0.7036195 </td>
+   <td style="text-align:right;"> 2.8003128 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> afternoon </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Meal </td>
+   <td style="text-align:left;"> 2022-07-16 23:55:00 </td>
+   <td style="text-align:left;"> 2022-07-17 04:25:00 </td>
+   <td style="text-align:left;"> Hyperglycemia </td>
+   <td style="text-align:right;"> 202 </td>
+   <td style="text-align:right;"> 454.8713 </td>
+   <td style="text-align:right;"> 0.813253 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 0.3453051 </td>
+   <td style="text-align:right;"> 0.7279544 </td>
+   <td style="text-align:right;"> 1.0732594 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> Yes </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:left;"> evening </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Meal </td>
+   <td style="text-align:left;"> 2022-07-17 07:53:00 </td>
+   <td style="text-align:left;"> 2022-07-17 12:23:00 </td>
+   <td style="text-align:left;"> Hyperglycemia </td>
+   <td style="text-align:right;"> 281 </td>
+   <td style="text-align:right;"> 8735.3979 </td>
+   <td style="text-align:right;"> 8.533333 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.0497262 </td>
+   <td style="text-align:right;"> 0.4243056 </td>
+   <td style="text-align:right;"> 0.4740318 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:left;"> Sunday </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> morning </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Meal </td>
+   <td style="text-align:left;"> 2022-07-18 15:31:00 </td>
+   <td style="text-align:left;"> 2022-07-18 20:01:00 </td>
+   <td style="text-align:left;"> Normoglycemia </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> No </td>
+   <td style="text-align:left;"> Monday </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> midday </td>
+  </tr>
+</tbody>
+</table>
 
 # Analysis
 
@@ -229,32 +466,166 @@ source("scripts/Categories_time.R")
 # Function to obtain ranges of glucose data, risk, and
 # time of the day and time of the week of time points
 fi <- Categories_time(fi)
-
-show_data(head(fi))
 ```
 
-\begin{table}
-\centering\begingroup\fontsize{10}{12}\selectfont
 
-\begin{tabular}{r|r|r|r|r|r}
-\hline
-Ozone & Solar.R & Wind & Temp & Month & Day\\
-\hline
-41 & 190 & 7.4 & 67 & 5 & 1\\
-\hline
-36 & 118 & 8.0 & 72 & 5 & 2\\
-\hline
-12 & 149 & 12.6 & 74 & 5 & 3\\
-\hline
-18 & 313 & 11.5 & 62 & 5 & 4\\
-\hline
-NA & NA & 14.3 & 56 & 5 & 5\\
-\hline
-28 & NA & 14.9 & 66 & 5 & 6\\
-\hline
-\end{tabular}
-\endgroup{}
-\end{table}
+```r
+kable(head(fi))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> time </th>
+   <th style="text-align:left;"> Bolus_type </th>
+   <th style="text-align:right;"> Injec_bolus </th>
+   <th style="text-align:left;"> Action </th>
+   <th style="text-align:right;"> Basal_rate </th>
+   <th style="text-align:right;"> Injec_basal </th>
+   <th style="text-align:right;"> Bolus_ActI </th>
+   <th style="text-align:right;"> Basal_ActI </th>
+   <th style="text-align:right;"> Total_ActI </th>
+   <th style="text-align:right;"> glucose </th>
+   <th style="text-align:right;"> slope </th>
+   <th style="text-align:right;"> slope15 </th>
+   <th style="text-align:left;"> Range </th>
+   <th style="text-align:left;"> meal_factor </th>
+   <th style="text-align:right;"> mealtime </th>
+   <th style="text-align:left;"> weekday </th>
+   <th style="text-align:right;"> timehour </th>
+   <th style="text-align:left;"> timeday </th>
+   <th style="text-align:right;"> risk </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2022-07-16 00:01:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 0.0116667 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2.125000 </td>
+   <td style="text-align:left;"> In range </td>
+   <td style="text-align:left;"> outmeal </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> night </td>
+   <td style="text-align:right;"> 1.6613429 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2022-07-16 00:06:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 0.0116667 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 119 </td>
+   <td style="text-align:right;"> -0.8 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> In range </td>
+   <td style="text-align:left;"> outmeal </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> night </td>
+   <td style="text-align:right;"> 1.0444300 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2022-07-16 00:11:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 0.0116667 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0044732 </td>
+   <td style="text-align:right;"> 0.0044732 </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> -1.0 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> In range </td>
+   <td style="text-align:left;"> outmeal </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> night </td>
+   <td style="text-align:right;"> 0.2439874 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2022-07-16 00:16:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 0.0116667 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0153147 </td>
+   <td style="text-align:right;"> 0.0153147 </td>
+   <td style="text-align:right;"> 107 </td>
+   <td style="text-align:right;"> -1.4 </td>
+   <td style="text-align:right;"> -1.066667 </td>
+   <td style="text-align:left;"> In range </td>
+   <td style="text-align:left;"> outmeal </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> night </td>
+   <td style="text-align:right;"> -0.9365794 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2022-07-16 00:21:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 0.0116667 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0311854 </td>
+   <td style="text-align:right;"> 0.0311854 </td>
+   <td style="text-align:right;"> 106 </td>
+   <td style="text-align:right;"> -0.2 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> In range </td>
+   <td style="text-align:left;"> outmeal </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> night </td>
+   <td style="text-align:right;"> -1.1113950 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2022-07-16 00:26:00 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 0.0116667 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0509331 </td>
+   <td style="text-align:right;"> 0.0509331 </td>
+   <td style="text-align:right;"> 108 </td>
+   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> In range </td>
+   <td style="text-align:left;"> outmeal </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> Saturday </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> night </td>
+   <td style="text-align:right;"> -0.7633610 </td>
+  </tr>
+</tbody>
+</table>
 
 ## Diabetes measuraments
 
@@ -267,10 +638,13 @@ source("scripts/Summary_diabetes_measurements.R")
 
 # Compute summary measures
 Diabetes_summary <- Summary_diabetes_measures(glucose, fi, events)
+```
 
+
+```r
 for(i in names(Diabetes_summary)){
   cat(i, "\n")
-  show_data(Diabetes_summary[[i]])
+  kable(Diabetes_summary[[i]])
 }
 ```
 

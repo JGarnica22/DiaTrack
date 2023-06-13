@@ -27,10 +27,12 @@ library(kableExtra)
 
 # For "kableExtra," we need to specify "html" format:
 show_data <- function(df) {
-  kable(head(airquality), digits = 2,
+  dt <- kable(df, digits = 2,
         format = "latex", row.names = F) %>%
     kable_styling(bootstrap_options = c("striped", "hover"),
                   full_width = F,
                   font_size = 10,
-                  position = "center")
+                  position = "center") %>% 
+    as_image(width=15)
+  return(dt)
 }

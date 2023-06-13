@@ -30,11 +30,10 @@ library(renv)
 options(renv.verbose = F)
 
 # Load the same packages versions using renv package
-restore()
+restore() 
 
 # Load utilities
 source("scripts/Utils.R")
-
 ```
 
 ## Diabetes manegement parameters
@@ -79,8 +78,10 @@ glu_path <- "data/CGM_xDrip_export_20230126-165100.csv"
 
 # Process glucose data
 glucose <- CGM_process(glupath)
+```
 
-show_data(glucose[100:106,])
+```{r show_glucose_processed_data}
+kable(glucose[100:106,])
 ```
 
 # Load and process Insulin pump data
@@ -100,8 +101,10 @@ ins_path <- "data/Insulin_pump_MiniMed_8-3-2023.csv"
 
 # Arrange insulin events and data and compute insulin in plasma
 tins <- Insulin_process(ins_path)
+```
 
-show_data(tins[206145:206151,])
+```{r show integrated insulin}
+kable(tins[206145:206151,])
 ```
 
 
@@ -143,8 +146,10 @@ At the same time we categorize datetime in weekdays, hours, and timeday for the 
 source("scripts/Event_classification.R")
 # Classifiy events, compute associated variables and categorize datetime
 events <- Event_classification(fi)
+```
 
-show_data(head(events))
+```{r show events}
+kable(head(events))
 ```
 
 # Analysis
@@ -157,8 +162,10 @@ source("scripts/Categories_time.R")
 # Function to obtain ranges of glucose data, risk, and
 # time of the day and time of the week of time points
 fi <- Categories_time(fi)
+```
 
-show_data(head(fi))
+```{r show integrated}
+kable(head(fi))
 ```
 
 ## Diabetes measuraments
@@ -171,10 +178,13 @@ source("scripts/Summary_diabetes_measurements.R")
 
 # Compute summary measures
 Diabetes_summary <- Summary_diabetes_measures(glucose, fi, events)
+```
+
+```{r show diabetes summary}
 
 for(i in names(Diabetes_summary)){
   cat(i, "\n")
-  show_data(Diabetes_summary[[i]])
+  kable(Diabetes_summary[[i]])
 }
 ```
 
