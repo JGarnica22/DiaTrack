@@ -1,13 +1,8 @@
 ---
 title: "Diabetes data analysis"
+subtitle: "Analysis of combined continuous glucose monitoring and insulin pump delivery data for type 1 diabetes treatment"
 author: "Josep Garnica Caparrós"
 date: "2023-06-13"
-output:
-  html_document:
-    toc: yes
-    toc_float: true
-    keep_md: yes
-subtitle: "Analysis of combined continuous glucose monitoring and insulin pump delivery data for type 1 diabetes treatment"
 ---
 
 
