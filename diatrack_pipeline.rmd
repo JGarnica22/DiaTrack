@@ -82,6 +82,7 @@ glucose <- CGM_process(glupath)
 
 ```{r show_glucose_processed_data}
 kable(glucose[100:106,])
+writexl::write_xlsx(glucose, "out/Processed_CGM_data.xlsx")
 ```
 
 # Load and process Insulin pump data
@@ -105,6 +106,7 @@ tins <- Insulin_process(ins_path)
 
 ```{r show integrated insulin}
 kable(tins[206145:206151,])
+writexl::write_xlsx(tins, "out/Processed_Insulin_data.xlsx")
 ```
 
 
@@ -150,6 +152,7 @@ events <- Event_classification(fi)
 
 ```{r show events}
 kable(head(events))
+writexl::write_xlsx(events, "out/Events_data.xlsx")
 ```
 
 # Analysis
@@ -166,6 +169,7 @@ fi <- Categories_time(fi)
 
 ```{r show integrated}
 kable(head(fi))
+writexl::write_xlsx(fi, "out/Integrated_data.xlsx")
 ```
 
 ## Diabetes measuraments
@@ -181,7 +185,6 @@ Diabetes_summary <- Summary_diabetes_measures(glucose, fi, events)
 ```
 
 ```{r show diabetes summary}
-
 for(i in names(Diabetes_summary)){
   cat(i, "\n")
   kable(Diabetes_summary[[i]])
