@@ -6,31 +6,37 @@ output:
   html_document:
     toc: yes
     toc_float: true
+    keep_md: yes
 subtitle: "Analysis of combined continuous glucose monitoring and insulin pump delivery data for type 1 diabetes treatment"
 ---
 
 ```{r setup, include=F, message=F}
 knitr::opts_knit$set(root.dir = 'C:/Users/Garnica/OneDrive - Universitat de Barcelona/Documentos/UOC/TFM/DiaTrack/')
 knitr::opts_chunk$set(echo = F, warning = F,include=T, message=F,
-                      results="markup",
+                      results="markup", cache=T, 
                       fig.path = "../figs/" ,
                       dev="svg")
 ```
 
 # Define parameters to use for analysis
 ## Diabetes manegement parameters
+We define the parameters we will use for our analysis. The threshold for hypoglycemia and hyperglycemia, the raw data source type, the time period we want to study and the how we categorize the times of the day.
 
-```{r}
+```{r analysis_parameters}
 #Set low and high threesholds:
 low <- 70
 high <- 180
+
+# set the source of glucose data
 glucose_source <- "xdrip"
+# set the source of insulin pump data
 insulin_source <- "MiniMed"
+
 #dates interval to show
 from <- "2022-07-16"
 to <- "2023-01-29"
 
-## setting timez of the day
+## setting times of the day
 morning <- c(7,12)
 midday <- c(13,15)
 afternoon <- c(16,19)
@@ -40,11 +46,13 @@ nigth <- c(0,6)
 
 
 ## Load and process CGM data
-```{r load data}
+```{r load_CGM_data}
 source("scripts/CGM_process.R")
 glu_path <- "data/CGM_xDrip_export_20230126-165100.csv"
 
 glucose <- CGM_process(glupath)
+
+
 ```
 
 ## Load and process Insulin pump data

@@ -570,25 +570,23 @@ Boxplot_glucose <- function(fi,
 Event_plot <- function(fi, events, subset="weekday"){
   ndays <- fi %>%
     mutate(day = format(time, "%D")) %>% 
-    distinct(day, fi[[subset]]) %>% 
-    group_by(fi[[subset]]) %>% 
+    distinct(day, .data[[subset]]) %>% 
+    group_by(.data[[subset]]) %>% 
     summarize(ndays = n())
-  names(nday)[1] <- subset
-  
+ 
   evdf <- rbind(
-    events %>% group_by(events[[subset]], Event_subtype) %>% 
+    events %>% group_by(.data[[subset]], Event_subtype) %>% 
       summarize(Count = n()) %>% rename(Event = "Event_subtype"),
-    events %>% group_by(events[[subset]], Event_type) %>% 
+    events %>% group_by(.data[[subset]], Event_type) %>% 
       summarize(Count = n()) %>% rename(Event = "Event_type")
-  ) %>% filter(!Event %in% c("Normoglycemia", "No_Meal"))
-  names(evdf)[1] <- subset
-  
-  eventplot <- evdf %>% 
+  ) %>% filter(!Event %in% c("Normoglycemia", "No_Meal"))%>% 
     left_join(ndays, ., by= subset) %>% 
-    mutate(Counts = Count/ndays) %>% 
-    ggplot(aes(weekday, Counts, fill=Event)) +
+    mutate(Counts = Count/ndays)
+
+  eventplot <- evdf  %>% 
+    ggplot(aes(.data[[subset]], Counts, fill=Event)) +
     geom_col(position = "dodge2")+
-    ylab("Counts/day of the week")+
+    ylab("Counts / day of the week")+
     xlab(subset)+
     theme_bw()
   return(eventplot)
@@ -597,21 +595,3 @@ Event_plot <- function(fi, events, subset="weekday"){
 
 
 ###############################################################################
-# time of the day
-ntime <- fi %>%
-  mutate(day = format(time, "%D")) %>% 
-  distinct(day, timeday) %>% 
-  group_by(timeday) %>% 
-  summarize(ntime = n())
-eventday <- rbind(
-  events %>% group_by(timeday, Event_subtype) %>% 
-    summarize(Count = n()) %>% rename(Event = "Event_subtype"),
-  events %>% group_by(timeday, Event_type) %>% 
-    summarize(Count = n()) %>% rename(Event = "Event_type")
-) %>% filter(!Event %in% c("Normoglycemia", "No_Meal")) %>% 
-  left_join(ntime, ., by= "timeday") %>% 
-  mutate(Counts = Count/ntime) %>% 
-  ggplot(aes(timeday, Counts, fill=Event)) +
-  geom_col(position = "dodge2")+
-  ylab("Counts/time of day")+
-  theme_bw()
