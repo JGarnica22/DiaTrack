@@ -1,11 +1,4 @@
----
-title: "Diabetes data analysis"
-subtitle: "Analysis of combined continuous glucose monitoring and insulin pump delivery data for type 1 diabetes treatment"
-author: "Josep Garnica Caparrós"
-date: "2023-06-13"
----
-
-
+date: 2023-06-14
 
 # Define parameters to use for analysis
 
@@ -140,12 +133,16 @@ kable(glucose[100:106,])
 </tbody>
 </table>
 
+```r
+writexl::write_xlsx(glucose, "out/Processed_CGM_data.xlsx")
+```
+
 # Load and process Insulin pump data
 
 In this step we use the function `Insulin_process()` to tidy up raw data from Minimed Pump (Medtronic) and also estimate the insulin in plasma levels using the model from Schiavon et al., 2018.
 
 <img src="figs/Shiavon_2018_model3.png" width="50%" style="display: block; margin: auto;" />
-*Model exracted from (Schiavon, Dalla Man, and Cobelli 2018). U: Units of insulin injected, t: time, Г: time delay, Isc1:Insulin compartment1 (subcutaneous), Isc2: Insulin compartment 2 (Interstitial), Ip: Insulin compartment 3 (plasma), Kd: rate of diffusion from compartment 1 to 2, Ka1: rate of diffusion from compartment 1 to 3, ka2: rate of diffusion from compartment 2 to 3, ke: rate of clearance from compartment 3, V1: plasma volume.*
+**Model exracted from (Schiavon, Dalla Man, and Cobelli 2018)**. U: Units of insulin injected, t: time, Г: time delay, Isc1:Insulin compartment1 (subcutaneous), Isc2: Insulin compartment 2 (Interstitial), Ip: Insulin compartment 3 (plasma), Kd: rate of diffusion from compartment 1 to 2, Ka1: rate of diffusion from compartment 1 to 3, ka2: rate of diffusion from compartment 2 to 3, ke: rate of clearance from compartment 3, V1: plasma volume.
 
 
 ```r
@@ -270,6 +267,10 @@ kable(tins[206145:206151,])
   </tr>
 </tbody>
 </table>
+
+```r
+writexl::write_xlsx(tins, "out/Processed_Insulin_data.xlsx")
+```
 
 
 # Merge glucose and insulin datasets
@@ -450,6 +451,10 @@ kable(head(events))
 </tbody>
 </table>
 
+```r
+writexl::write_xlsx(events, "out/Events_data.xlsx")
+```
+
 # Analysis
 
 We also categorize datetime in weekdays, hours, and timeday of the glucose and insulin data integrated dataframe, using the funcion `Categories_time()`.
@@ -621,6 +626,10 @@ kable(head(fi))
   </tr>
 </tbody>
 </table>
+
+```r
+writexl::write_xlsx(fi, "out/Integrated_data.xlsx")
+```
 
 ## Diabetes measuraments
 
@@ -1017,7 +1026,7 @@ fi %>%
   ebc.plot(tit="24h")
 ```
 
-![](figs/CVGA plots-1.png)<!-- -->
+![](figs/CVGA_plots-1.png)<!-- -->
 
 ```r
 # On Afternoon
@@ -1030,7 +1039,7 @@ fi %>%
   ebc.plot(tit=i) %>% print()
 ```
 
-![](figs/CVGA plots-2.png)<!-- -->
+![](figs/CVGA_plots-2.png)<!-- -->
 
 ```r
 # On Mondays
@@ -1043,7 +1052,7 @@ fi %>%
   ebc.plot(tit=i) %>% print()
 ```
 
-![](figs/CVGA plots-3.png)<!-- -->
+![](figs/CVGA_plots-3.png)<!-- -->
 
 ```r
 # After meal
@@ -1056,7 +1065,7 @@ fi %>%
   ebc.plot(tit=i) %>% print()
 ```
 
-![](figs/CVGA plots-4.png)<!-- -->
+![](figs/CVGA_plots-4.png)<!-- -->
 
 ## boxplot
 
