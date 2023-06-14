@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-.DiaTrack.Rproj
+DiaTrack.Rproj
 diatrack_pipeline_cache/
 diatrack_pipeline.html
-
+.Rprofile
